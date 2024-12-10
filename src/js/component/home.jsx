@@ -11,7 +11,7 @@ const Home = () => {
     const syncTasksWithServer = (todos) => {
         fetch(apiUrlTodos, {
             method: "PUT", // Usamos PUT para actualizar la lista completa de tareas
-            body: JSON.stringify({ todos }), // Enviamos las tareas dentro de un objeto 'todos'
+            body: JSON.stringify({ todos }), // Enviamos las tareas dentro de un objeto todos
             headers: {
                 "Content-Type": "application/json"
             }
@@ -73,7 +73,7 @@ const Home = () => {
             .catch(error => console.error("Error al cargar tareas:", error));
     };
 
-    // Cargar tareas iniciales al montar el componente
+    // Cargar tareas iniciales
     useEffect(() => {
         fetchTasks(); // Llamar a la función para cargar las tareas desde la API
     }, []);
@@ -124,7 +124,7 @@ const Home = () => {
             .catch(error => console.error("Error al eliminar tarea:", error));
     };
 
-    // Función para limpiar todas las tareas
+    // Función para eliminar todas las tareas
     const clearAllTasks = () => {
         // Eliminar todas las tareas individualmente
         Promise.all(
@@ -163,13 +163,13 @@ const Home = () => {
                     ) : (
                         tasks.map((task, index) => (
                             <li
-                                key={task.id} // Usamos el ID para la clave única
+                                key={task.id} // Usamos el ID
                                 className="todo-item d-flex justify-content-between align-items-center"
                             >
                                 {task.label}
                                 <span
                                     className="todo-delete"
-                                    onClick={() => deleteTask(task.id)} // Pasamos el ID de la tarea a eliminar
+                                    onClick={() => deleteTask(task.id)} // Pasamos el ID de la tarea para eliminarla
                                 >
                                     ✖
                                 </span>
@@ -179,8 +179,8 @@ const Home = () => {
                 </ul>
                 <div className="todo-footer d-flex justify-content-between">
                     <span>{tasks.length} item{tasks.length !== 1 ? "s" : ""} restantes</span>
-                    <button className="clear-btn" onClick={clearAllTasks}>
-                        Limpiar todo
+                    <button className="btn btn-danger clear-btn" onClick={clearAllTasks}>
+                        Eliminar Tareas
                     </button>
                 </div>
             </div>
